@@ -185,6 +185,8 @@ class Instructor extends Lambdasian {
 
 
 
+
+
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -200,9 +202,38 @@ class Instructor extends Lambdasian {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
+class Student extends Lambdasian {
+  constructor (studentAttrs) {
+    super (studentAttrs);
+    this.previousBackground = studentAttrs.previousBackground;
+    this.className = studentAttrs.className;
+    this.favSubjects = studentAttrs.favSubjects;
+  };
+  listSubjects () {
+    return `Loving ${this.favSubjects}!`;
+  };
+  PRAssignment (studentOb, subjectString) {
+    return `${this.name} has submitted a PR for ${subjectString}.`;
+  };
+  sprintChallenge (studentObj, subjectString) {
+    return `${this.name} has begun sprint challenge on ${subjectString}.`;
+  };
+};
 
-}
+//Testing
+// const hannah = new Student({
+//   name: 'Raya',
+//   age: 25,
+//   location: 'Denver',
+//   previousBackground: 'web design and psychology',
+//   className: 'CS1384',
+//   favSubjects: ['CSS', 'HTML'],
+// });
+// console.log(hannah.listSubjects());
+// console.log(hannah.PRAssignment(hannah, 'CSS'));
+// console.log(hannah.sprintChallenge(hannah, 'HTML'));
+
+
 
 /*
   TASK 6
