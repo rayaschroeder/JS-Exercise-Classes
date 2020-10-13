@@ -29,9 +29,8 @@ class Airplane {
 
 /*
   TASK 1
-    - Write a Person class whose constructor initializes `name` and `age` from arguments.
-    - All instances of Person should also initialize with an empty `stomach` array.
-    - Give instances of Person the ability to `.eat("someFood")`:
+    - Write a Person class whose constructor initializes `name` and `age` from arguments. 
+    - All instances of Person should also initialize with an empty `stomach` array. 
         + When eating an edible, it should be pushed into the `stomach`.
         + The `eat` method should have no effect if there are 10 items in the `stomach`.
     - Give instances of Person the ability to `.poop()`:
@@ -41,17 +40,38 @@ class Airplane {
 */
 
 class Person {
+  constructor (name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  };
+  eat (foodItem) {
+    if (this.stomach.length < 10) {
+      this.stomach.push(foodItem);
+      return `You ate ${foodItem}. Your stomach now has ${this.stomach.length} items in it.`;
+    } else {
+    return `Your stomach is full! You can't eat any more food right now`;
+    }
+  };
+  poop() {
+    this.stomach = [];
+    return `You pooped! Your stomach is now empty.`;
+  };
+  toString() {
+    return `${this.name}, ${this.age}`;
+  };
+};
 
-}
+
 
 /*
   TASK 2
-    - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
+    - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments. //
     - All instances built with Car:
         + should initialize with a `tank` at 0
         + should initialize with an `odometer` at 0
-    - Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`.
-    - Give cars ability to `.drive(distance)`. The distance driven:
+    - Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`. //
+    - Give cars ability to `.drive(distance)`. The distance driven: //
         + Should cause the `odometer` to go up.
         + Should cause the the `tank` to go down taking `milesPerGallon` into account.
     - A car which runs out of `fuel` while driving can't drive any more distance:
@@ -59,42 +79,113 @@ class Person {
 */
 
 class Car {
+  constructor (model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  };
+  fill (gallons) {
+    this.tank += gallons;
+    return `You filled your call with ${gallons} gallons. Your tank now has ${this.tank} gallons in it.`;
+  };
+  drive (distance) {
+    this.odometer += distance;
+    if (distance > this.tank) {
+      console.log (`You ran out of fuel at ${this.tank} miles!`);
+      this.tank -= (this.tank);
+    };
+    if (distance < this.tank) {
+      this.tank -= distance;
+      return `You drove your car ${distance} miles. Your tank now has ${this.tank} gallons in it.`
+    };
+    if (this.tank === distance) {
+     this.tank -= distance; 
+     return `You drove your car ${distance} miles. Your tank is now empty.`
+    };
+  };
+};
 
-}
 
 /*
   TASK 3
     - Write a Lambdasian class.
-    - Its constructor takes a single argument - an object with the following keys:
+    - Its constructor takes a single argument - an object with the following keys: //
         + name
         + age
         + location
-    - Its constructor should initialize `name`, `age` and `location` properties on the instance.
+    - Its constructor should initialize `name`, `age` and `location` properties on the instance. //
     - Instances of Lambdasian should be able to `.speak()`:
         + Speaking should return a phrase `Hello my name is {name}, I am from {location}`.
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
+  constructor (attrs) {
+    this.name = attrs.name;
+    this.age = attrs.age;
+    this.location = attrs.location;
+  };
+  speak () {
+    return `Hello my name is ${this.name}, I am from ${this.location}.`;
+  };
+};
 
-}
+//Test
+// const Raya = new Lambdasian({
+//   name: 'Raya',
+//   age: 25,
+//   location: 'Denver',
+// });
+// console.log(Raya.speak());
+
+
+
 
 /*
   TASK 4
     - Write an Instructor class extending Lambdasian.
     - Its constructor takes a single argument - an object with the following keys:
-        + All the keys used to initialize instances of Lambdasian.
+        + All the keys used to initialize instances of Lambdasian. 
         + `specialty`: what the instance of Instructor is good at, i.e. 'redux'
         + `favLanguage`: i.e. 'JavaScript, Python, Elm etc.'
         + `catchPhrase`: i.e. `Don't forget the homies`.
-    - The constructor calls the parent constructor passing it what it needs.
+    - The constructor calls the parent constructor passing it what it needs. 
     - The constructor should also initialize `specialty`, `favLanguage` and `catchPhrase` properties on the instance.
     - Instructor instances have the following methods:
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
 
-}
+class Instructor extends Lambdasian {
+  constructor (instructorAttrs){
+    super(instructorAttrs);
+    this.specialty = instructorAttrs.specialty;
+    this.favLanguage = instructorAttrs.favLanguage;
+    this.catchPhrase = instructorAttrs.catchPhrase;
+  };
+  demo (subjectString) {
+    return `Today we are learning about ${subjectString}.`
+  };
+  grade (studentObj, subjectString) {
+    return `${this.name} receives a perfect score on ${subjectString}.`;
+  }
+};
+
+// Test
+// const bob = new Instructor ({
+//   name: 'Bob',
+//   age: 20,
+//   location: 'Hawaii',
+//   specialty: 'react',
+//   favLanguage: 'JavaScript',
+//   catchPhrase: 'I love coding',
+// });
+// console.log(bob.demo('methods'));
+// console.log(bob.grade(bob, 'methods'));
+
+
+
+
 
 /*
   TASK 5
@@ -111,9 +202,38 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
+class Student extends Lambdasian {
+  constructor (studentAttrs) {
+    super (studentAttrs);
+    this.previousBackground = studentAttrs.previousBackground;
+    this.className = studentAttrs.className;
+    this.favSubjects = studentAttrs.favSubjects;
+  };
+  listSubjects () {
+    return `Loving ${this.favSubjects}!`;
+  };
+  PRAssignment (studentOb, subjectString) {
+    return `${this.name} has submitted a PR for ${subjectString}.`;
+  };
+  sprintChallenge (studentObj, subjectString) {
+    return `${this.name} has begun sprint challenge on ${subjectString}.`;
+  };
+};
 
-}
+//Test
+const hannah = new Student({
+  name: 'Raya',
+  age: 25,
+  location: 'Denver',
+  previousBackground: 'web design and psychology',
+  className: 'CS1384',
+  favSubjects: ['CSS', 'HTML'],
+});
+console.log(hannah.listSubjects());
+console.log(hannah.PRAssignment(hannah, 'CSS'));
+console.log(hannah.sprintChallenge(hannah, 'HTML'));
+
+
 
 /*
   TASK 6
@@ -128,9 +248,34 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-
+class ProjectManager extends Instructor {
+  constructor (pmAttrs) {
+  super (pmAttrs);
+  this.gradClassName = pmAttrs.gradClassName;
+  this.favInstructor = pmAttrs.favInstructor;
+  };
+  standUp (pmObject, slackChannel) {
+    return `${this.name} announces to ${slackChannel}, @channel standy times!`;
+  };
+  debugsCode (pmObject, studentObj, subjectString) {
+    return `${pmObject.name} debugs ${studentObj.name}'s code on ${subjectString}.`;
+  };
 }
+
+//Testing
+const Jill = new ProjectManager ({
+  name: 'Jill',
+  age: 28,
+  location: 'Ohio',
+  specialty: 'JavaScript',
+  favLanguage: 'HTML',
+  catchPhrase: 'Pizza is my husband',
+  gradClassName: 'CS21',
+  favInstructor: 'Joe',
+});
+console.log(Jill.standUp(Jill, 'LSPT2300932'));
+console.log(Jill.debugsCode(Jill, hannah, 'HTML'));
+
 
 /*
   STRETCH PROBLEM (no tests!)
