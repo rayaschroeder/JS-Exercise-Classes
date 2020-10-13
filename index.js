@@ -220,18 +220,18 @@ class Student extends Lambdasian {
   };
 };
 
-//Testing
-// const hannah = new Student({
-//   name: 'Raya',
-//   age: 25,
-//   location: 'Denver',
-//   previousBackground: 'web design and psychology',
-//   className: 'CS1384',
-//   favSubjects: ['CSS', 'HTML'],
-// });
-// console.log(hannah.listSubjects());
-// console.log(hannah.PRAssignment(hannah, 'CSS'));
-// console.log(hannah.sprintChallenge(hannah, 'HTML'));
+//Test
+const hannah = new Student({
+  name: 'Raya',
+  age: 25,
+  location: 'Denver',
+  previousBackground: 'web design and psychology',
+  className: 'CS1384',
+  favSubjects: ['CSS', 'HTML'],
+});
+console.log(hannah.listSubjects());
+console.log(hannah.PRAssignment(hannah, 'CSS'));
+console.log(hannah.sprintChallenge(hannah, 'HTML'));
 
 
 
@@ -248,9 +248,34 @@ class Student extends Lambdasian {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-
+class ProjectManager extends Instructor {
+  constructor (pmAttrs) {
+  super (pmAttrs);
+  this.gradClassName = pmAttrs.gradClassName;
+  this.favInstructor = pmAttrs.favInstructor;
+  };
+  standUp (pmObject, slackChannel) {
+    return `${this.name} announces to ${slackChannel}, @channel standy times!`;
+  };
+  debugsCode (pmObject, studentObj, subjectString) {
+    return `${pmObject.name} debugs ${studentObj.name}'s code on ${subjectString}.`;
+  };
 }
+
+//Testing
+const Jill = new ProjectManager ({
+  name: 'Jill',
+  age: 28,
+  location: 'Ohio',
+  specialty: 'JavaScript',
+  favLanguage: 'HTML',
+  catchPhrase: 'Pizza is my husband',
+  gradClassName: 'CS21',
+  favInstructor: 'Joe',
+});
+console.log(Jill.standUp(Jill, 'LSPT2300932'));
+console.log(Jill.debugsCode(Jill, hannah, 'HTML'));
+
 
 /*
   STRETCH PROBLEM (no tests!)
