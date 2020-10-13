@@ -131,12 +131,12 @@ class Lambdasian {
 };
 
 //Test
-const Raya = new Lambdasian({
-  name: 'Raya',
-  age: 25,
-  location: 'Denver',
-});
-console.log(Raya.speak());
+// const Raya = new Lambdasian({
+//   name: 'Raya',
+//   age: 25,
+//   location: 'Denver',
+// });
+// console.log(Raya.speak());
 
 
 
@@ -145,19 +145,45 @@ console.log(Raya.speak());
   TASK 4
     - Write an Instructor class extending Lambdasian.
     - Its constructor takes a single argument - an object with the following keys:
-        + All the keys used to initialize instances of Lambdasian.
+        + All the keys used to initialize instances of Lambdasian. 
         + `specialty`: what the instance of Instructor is good at, i.e. 'redux'
         + `favLanguage`: i.e. 'JavaScript, Python, Elm etc.'
         + `catchPhrase`: i.e. `Don't forget the homies`.
-    - The constructor calls the parent constructor passing it what it needs.
+    - The constructor calls the parent constructor passing it what it needs. 
     - The constructor should also initialize `specialty`, `favLanguage` and `catchPhrase` properties on the instance.
     - Instructor instances have the following methods:
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
 
-}
+class Instructor extends Lambdasian {
+  constructor (instructorAttrs){
+    super(instructorAttrs);
+    this.specialty = instructorAttrs.specialty;
+    this.favLanguage = instructorAttrs.favLanguage;
+    this.catchPhrase = instructorAttrs.catchPhrase;
+  };
+  demo (subjectString) {
+    return `Today we are learning about ${subjectString}.`
+  };
+  grade (studentObj, subjectString) {
+    return `${this.name} receives a perfect score on ${subjectString}.`;
+  }
+};
+
+// Test
+// const bob = new Instructor ({
+//   name: 'Bob',
+//   age: 20,
+//   location: 'Hawaii',
+//   specialty: 'react',
+//   favLanguage: 'JavaScript',
+//   catchPhrase: 'I love coding',
+// });
+// console.log(bob.demo('methods'));
+// console.log(bob.grade(bob, 'methods'));
+
+
 
 /*
   TASK 5
