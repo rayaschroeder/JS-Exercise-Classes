@@ -29,9 +29,8 @@ class Airplane {
 
 /*
   TASK 1
-    - Write a Person class whose constructor initializes `name` and `age` from arguments.
-    - All instances of Person should also initialize with an empty `stomach` array.
-    - Give instances of Person the ability to `.eat("someFood")`:
+    - Write a Person class whose constructor initializes `name` and `age` from arguments. 
+    - All instances of Person should also initialize with an empty `stomach` array. 
         + When eating an edible, it should be pushed into the `stomach`.
         + The `eat` method should have no effect if there are 10 items in the `stomach`.
     - Give instances of Person the ability to `.poop()`:
@@ -41,8 +40,29 @@ class Airplane {
 */
 
 class Person {
+  constructor (name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  };
+  eat (foodItem) {
+    if (this.stomach.length < 10) {
+      this.stomach.push(foodItem);
+      return `You ate ${foodItem}. Your stomach now has ${this.stomach.length} items in it.`;
+    } else {
+    return `Your stomach is full! You can't eat any more food right now`;
+    }
+  };
+  poop() {
+    this.stomach = [];
+    return `You pooped! Your stomach is now empty.`;
+  };
+  toString() {
+    return `${this.name}, ${this.age}`;
+  };
+};
 
-}
+
 
 /*
   TASK 2
@@ -59,7 +79,7 @@ class Person {
 */
 
 class Car {
-
+  constructor ()
 }
 
 /*
