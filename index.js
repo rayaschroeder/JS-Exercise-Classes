@@ -66,12 +66,12 @@ class Person {
 
 /*
   TASK 2
-    - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
+    - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments. //
     - All instances built with Car:
         + should initialize with a `tank` at 0
         + should initialize with an `odometer` at 0
-    - Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`.
-    - Give cars ability to `.drive(distance)`. The distance driven:
+    - Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`. //
+    - Give cars ability to `.drive(distance)`. The distance driven: //
         + Should cause the `odometer` to go up.
         + Should cause the the `tank` to go down taking `milesPerGallon` into account.
     - A car which runs out of `fuel` while driving can't drive any more distance:
@@ -79,8 +79,33 @@ class Person {
 */
 
 class Car {
-  constructor ()
-}
+  constructor (model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  };
+  fill (gallons) {
+    this.tank += gallons;
+    return `You filled your call with ${gallons} gallons. Your tank now has ${this.tank} gallons in it.`;
+  };
+  drive (distance) {
+    this.odometer += distance;
+    if (distance > this.tank) {
+      console.log (`You ran out of fuel at ${this.tank} miles!`);
+      this.tank -= (this.tank);
+    };
+    if (distance < this.tank) {
+      this.tank -= distance;
+      return `You drove your car ${distance} miles. Your tank now has ${this.tank} gallons in it.`
+    };
+    if (this.tank === distance) {
+     this.tank -= distance; 
+     return `You drove your car ${distance} miles. Your tank is now empty.`
+    };
+  };
+};
+
 
 /*
   TASK 3
